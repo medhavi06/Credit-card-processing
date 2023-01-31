@@ -1,9 +1,14 @@
-const express = require('express');
+import express from 'express';
+import { addCardData, listCardData } from '../controller/creditCardController.js';
+
 const router = express.Router();
 
-/* GET home page. */
-router.post('/add_card', (req, res) => {
-    res.send('adding a credit card');
-});
+router
+  .route('/add_card')
+  .post((req, res) => addCardData(req, res));
 
-module.exports = router;
+router
+  .route('/list_cards')
+  .get((req, res) => listCardData(req, res));
+
+export default router;

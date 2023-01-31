@@ -1,14 +1,13 @@
-const datastoreStrategy = require('../strategy/datastoreStategy')
+import DatastoreStrategy from '../strategy/datastoreStrategy.js';
 
-class InMemoryStore extends datastoreStrategy {
-    //define get n save
-    getData() {
-       //logic to get data
-        console.log("Printing  : !!!!!");
-    }
-    setData(data) {
-        console.log("Printing data : !!!!!");
-        console.log(data);
-    }
+class InMemoryStore extends DatastoreStrategy {
+  getData() {
+    // logic to get data
+  }
+
+  setData(data) {
+
+  }
 }
-module.export = InMemoryStore;
+
+export default InMemoryStore;

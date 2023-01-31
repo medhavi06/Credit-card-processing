@@ -1,27 +1,15 @@
+class DatastoreStrategy {
+  setStrategy(strategy) {
+    this.strategy = strategy;
+  }
 
-class DatastoreStrategy{
-    setStrategy (strategy) {
-        this._strategy = strategy;
-    }
-    getData () {
-        return this._strategy.getData();
-    }
-    setData (data) {
-        this._strategy.setData(data);
-    }
+  getData() {
+    return this.strategy.getData();
+  }
 
+  setData(data) {
+    this.strategy.setData(data);
+  }
 }
-// const DatastoreStrategy = function () {
-//     this.setStrategy = function (strategy) {
-//         this._strategy = strategy;
-//     }
-//     this.getData = function () {
-//         return this._strategy.getData();
-//     }
-//     this.setData = function (data) {
-//         this._strategy.setData(data);
-//     }
-// }
 
-
-module.exports = DatastoreStrategy;
+export default DatastoreStrategy;
