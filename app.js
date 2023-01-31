@@ -1,11 +1,21 @@
 import express from 'express';
-import logger from 'morgon';
+import morgan from 'morgan';
+import rfs from 'rotating-file-stream';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import creditCardRouter from './routes/creditCardRoute.js';
 import DatastoreStrategy from './strategy/datastoreStrategy.js';
 import InMemoryStore from './datastore/inMemoryStore.js';
+
 const app = express();
 
-app.use(logger('dev'));
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const accessLogStream = rfs.createStream('access.log', {
+  interval: '1d', // rotate daily
+  path: path.join(dirname, 'log'),
+});
+app.use(morgan('combined', { stream: accessLogStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
