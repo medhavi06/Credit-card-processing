@@ -1,9 +1,11 @@
 export default class CreditCardModel {
     _limit;
     _creditCardNumber;
+    _balance;
 
     constructor(limit, creditCardNumber) {
         this._limit = limit;
+        this._balance = 0;
         this._creditCardNumber = creditCardNumber;
     }
 

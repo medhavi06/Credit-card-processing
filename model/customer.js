@@ -1,12 +1,10 @@
-import creditCardModel from "./creditCardModel";
-
-class Customer {
+export default class Customer {
     _creditCardModel;
     _name;
 
-    constructor(name) {
+    constructor(name, creditCardModel) {
         this._name = name;
-        this._creditCardModel = new creditCardModel();
+        this._creditCardModel = creditCardModel;
     }
 
     get name() {
