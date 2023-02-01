@@ -2,12 +2,12 @@ import DatastoreStrategy from '../strategy/datastoreStrategy.js';
 
 export default class InMemoryStore extends DatastoreStrategy {
     _creditCardStore = {};
-    _creditCardStoreFormatted = [];
+    _creditCardNumberSet = [];
 
     constructor() {
         super();
         this._creditCardStore = new Map();
-        this._creditCardStoreFormatted = new Set();
+        this._creditCardNumberSet = new Set();
     }
 
     getData() {
@@ -27,17 +27,13 @@ export default class InMemoryStore extends DatastoreStrategy {
     setData(data) {
         if (this.checkIsCardUnique(data._creditCardModel._creditCardNumber)) {
             this._creditCardStore.set(data._creditCardModel._creditCardNumber, data);
-            this._creditCardStoreFormatted.add(this.formatCreditCard(data._creditCardModel._creditCardNumber));
-            console.log(this._creditCardStore);
+            this._creditCardNumberSet.add(this.formatCreditCard(data._creditCardModel._creditCardNumber));
         }
     }
 
     checkIsCardUnique(creditCardNumber) {
-        if (this._creditCardStoreFormatted.has(this.formatCreditCard(creditCardNumber))) {
-            console.log("This card already exists");
-            return false;
-        }
-        return true;
+        return !this._creditCardNumberSet.has(this.formatCreditCard(creditCardNumber));
+
     }
 
     formatCreditCard(creditCardNumber) {

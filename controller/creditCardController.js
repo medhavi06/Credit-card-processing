@@ -2,8 +2,7 @@ import Customer from "../model/customer.js";
 import CreditCardModel from "../model/creditCardModel.js";
 
 export const addCardData = (req, res) => {
-    const dbObject = req.app.get('dbObject')
-    console.log(req.body);
+    const dbObject = req.app.get('dbObject');
     let creditCard = new CreditCardModel(req.body.limit, req.body.card_number);
     let customer = new Customer(req.body.name, creditCard);
     dbObject.setData(customer);
