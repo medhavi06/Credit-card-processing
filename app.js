@@ -9,7 +9,6 @@ import DatastoreStrategy from './strategy/datastoreStrategy.js';
 import InMemoryStore from './datastore/inMemoryStore.js';
 import helmet from "helmet";
 import fs from "fs";
-import https from "https";
 
 dotenv.config()
 const app = express();
@@ -32,6 +31,13 @@ if (app.get('env') === 'production') {
 } else if (app.get('env') === 'development') {
     app.use(morgan('combined'));
 }
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -65,7 +71,7 @@ app.use((err, req, res) => {
 });
 
 
-https.createServer(HTTPSOptions, app).listen(app.get('port'), (err) => {
+app.listen(app.get('port'), (err) => {
     if (err) {
         console.log(err)
     }

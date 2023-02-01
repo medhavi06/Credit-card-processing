@@ -6,7 +6,7 @@ export const addCardData = (req, res) => {
     let creditCard = new CreditCardModel(req.body.limit, req.body.card_number);
     let customer = new Customer(req.body.name, creditCard);
     dbObject.setData(customer);
-    return res.send('adding a credit card');
+    return res.json({msg: 'credit card added successfully'}).status(200);
 };
 
 export const listCardData = (req, res) => {
