@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
-import rfs from 'rotating-file-stream';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import creditCardRouter from './routes/creditCardRoute.js';
@@ -21,16 +20,8 @@ app.set('port', port);
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-const accessLogStream = rfs.createStream('access.log', {
-    interval: '1d', // rotate daily
-    path: path.join(dirname, 'log'),
-});
 
-if (app.get('env') === 'production') {
-    app.use(morgan('combined', {stream: accessLogStream}));
-} else if (app.get('env') === 'development') {
-    app.use(morgan('combined'));
-}
+app.use(morgan('combined'));
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
