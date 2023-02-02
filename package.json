@@ -6,10 +6,12 @@
   "scripts": {
     "start": " node app",
     "lint": "eslint .  --ext .js",
-    "lint-fix": "eslint --fix .  --ext .js",
-    "test": "mocha test"
+    "lint-fix": "eslint --fix .",
+    "test": "env NODE_ENV=test  mocha test --exit"
   },
   "dependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-validator": "^6.14.3",

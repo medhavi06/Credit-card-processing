@@ -1,6 +1,4 @@
 export default class CreditCardModel {
-    _limit;
-    _creditCardNumber;
     _balance;
 
     constructor(limit, creditCardNumber) {
@@ -9,6 +7,8 @@ export default class CreditCardModel {
         this._creditCardNumber = creditCardNumber;
     }
 
+    _limit;
+
     get limit() {
         return this._limit;
     }
@@ -16,6 +16,8 @@ export default class CreditCardModel {
     set limit(value) {
         this._limit = value;
     }
+
+    _creditCardNumber;
 
     get creditCardNumber() {
         return this._creditCardNumber;

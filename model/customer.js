@@ -1,26 +1,26 @@
 export default class Customer {
-    _creditCardModel;
-    _name;
+  _creditCardModel;
 
-    constructor(name, creditCardModel) {
-        this._name = name;
-        this._creditCardModel = creditCardModel;
-    }
+  _name;
 
-    get name() {
-        return this._name;
-    }
+  constructor(name, creditCardModel) {
+    this._name = name;
+    this._creditCardModel = creditCardModel;
+  }
 
-    set name(value) {
-        this._name = value;
-    }
+  get name() {
+    return this._name;
+  }
 
-    get creditCardModel() {
-        return this._creditCardModel;
-    }
+  set name(value) {
+    this._name = value;
+  }
 
-    set creditCardModel(value) {
-        this._creditCardModel = value;
-    }
+  get creditCardModel() {
+    return this._creditCardModel;
+  }
 
+  set creditCardModel(value) {
+    this._creditCardModel = value;
+  }
 }

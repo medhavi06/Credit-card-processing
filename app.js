@@ -3,17 +3,17 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import {fileURLToPath} from 'url';
+import helmet from 'helmet';
+import fs from 'fs';
 import creditCardRouter from './routes/creditCardRoute.js';
 import DatastoreStrategy from './strategy/datastoreStrategy.js';
 import InMemoryStore from './datastore/inMemoryStore.js';
-import helmet from "helmet";
-import fs from "fs";
 
-dotenv.config()
+dotenv.config();
 const app = express();
 const HTTPSOptions = {
     key: fs.readFileSync('certificates/key.pem'),
-    cert: fs.readFileSync('certificates/cert.pem')
+    cert: fs.readFileSync('certificates/cert.pem'),
 };
 const port = process.env.PORT || 3000;
 app.set('port', port);
@@ -21,9 +21,10 @@ app.set('port', port);
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-app.use(morgan('combined'));
-
-app.use(function (req, res, next) {
+if (process.env.NODE_ENV !== 'test') {
+    app.use(morgan('combined'));
+}
+app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', '*');
@@ -41,8 +42,8 @@ app.set('dbObject', strategyManager);
 app.use('/api/v1', creditCardRouter);
 
 app.get('/', (req, res) => {
-    res.send("Hello from server.")
-})
+    res.send('Hello from server.');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -61,10 +62,11 @@ app.use((err, req, res) => {
     res.send({error: 'Not Found'});
 });
 
-
 app.listen(app.get('port'), (err) => {
     if (err) {
-        console.log(err)
+        console.log(err);
     }
     console.log(`Example app listening at https://localhost:${port}`);
 });
+
+export default app;
